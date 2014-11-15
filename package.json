@@ -1,0 +1,35 @@
+{
+  "name": "midiot",
+  "homepage": "https://github.com/reelyactive/midiot/",
+  "author": "reelyActive <webdev@reelyactive.com>",
+  "description": "MIDI meets Internet of Things.  Real-time, real-world sounds.",
+  "keywords": [
+    "reelyActive",
+    "Smart Spaces",
+    "IoT",
+    "MIDI",
+    "Audio"
+  ],
+  "version": "0.0.0",
+  "engines": {
+    "node": "^0.10.0"
+  },
+  "main": "./lib/server.js",
+  "bin": {
+    "midiot": "./bin/midiot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/reelyactive/midiot.git"
+  },
+  "dependencies": {
+    "barnowl": ">=0.4.4",
+    "barnacles": ">=0.0.2",
+    "midi": ">=0.9.0"
+  },
+  "devDependencies": {},
+  "bugs": {
+    "url": "https://github.com/reelyactive/midiot/issues"
+  },
+  "license": "MIT"
+}
