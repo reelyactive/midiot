@@ -21,6 +21,7 @@ var midiot = require('midiot');
 var barnowl = require('barnowl');
 
 var MIDDLE_C_KEY = 60;
+var NOTE_LENGTH_MILLISECONDS = 100;
 
 var middleware = new barnowl();
 var soundscape = new midiot();
@@ -34,7 +35,12 @@ soundscape.openPort();
 soundscape.on('event', function(data) {
   var key = MIDDLE_C_KEY + (parseInt(data.id, 16) % 12);
   var velocity = data.rssi / 2;
-  soundscape.outputMessage( { noteOn: { channel: 0, key: key, velocity: velocity } } );
+  var parameters = { channel: channel, key: key, velocity: velocity };
+
+  soundscape.outputMessage( { noteOn: parameters } );
+
+  setTimeout(function() { soundscape.outputMessage({ noteOff: parameters }); },
+             NOTE_LENGTH_MILLISECONDS);
 });
 ```
 
