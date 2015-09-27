@@ -2,7 +2,7 @@
   "name": "midiot",
   "homepage": "https://github.com/reelyactive/midiot/",
   "author": "reelyActive <webdev@reelyactive.com>",
-  "description": "MIDI meets Internet of Things.  Real-time, real-world sounds.",
+  "description": "MIDI meets Internet of Things.  Real-time, real-world sounds.  We believe in an open Internet of Things.",
   "keywords": [
     "reelyActive",
     "Smart Spaces",
@@ -23,7 +23,9 @@
     "url": "https://github.com/reelyactive/midiot.git"
   },
   "dependencies": {
-    "midi": ">=0.9.3"
+    "midi": ">=0.9.3",
+    "express": ">=4.0.0",
+    "path": ">=0.11.0"
   },
   "devDependencies": {},
   "bugs": {
