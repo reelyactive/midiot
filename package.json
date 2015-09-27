@@ -25,7 +25,8 @@
   "dependencies": {
     "midi": ">=0.9.3",
     "express": ">=4.0.0",
-    "path": ">=0.11.0"
+    "path": ">=0.11.0",
+    "socket.io": ">=1.3.7"
   },
   "devDependencies": {},
   "bugs": {
