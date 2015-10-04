@@ -33,7 +33,13 @@
           </ul>
         </div>
       </nav>
-      <div>
+
+      <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+
+
+      <div class="well">
         <form class="form-inline">
           <button ng-click="controls.mute = !controls.mute; control()"
                   class="btn ngclass: {{controls.mute?
@@ -93,43 +99,16 @@
             <ul class="dropdown-menu" role="menu"
                 aria-labelledby="single-button">
               <li role="menuitem"><a ng-click="device.category = 'Instrument'; update(device)">Instrument</a></li>
+              <li role="menuitem"><a ng-click="device.category = 'Controller'; update(device)">Controller</a></li>
               <li role="menuitem"><a ng-click="device.category = 'Tap Tempo'; update(device)">Tap Tempo</a></li>
             </ul>
           </div>
         </form>
       </div>
 
-      <!--<div class="row" ng-repeat="(id, device) in devices">
-        <div class="col-md-2"> <b>{{id}}</b> </div>
-        <div class="col-md-2">
-          <button type="button"
-                  class="btn ngclass: {{(device.type === 'noteOn')?
-                                        'btn-success' : 'btn-default'}}">
-            {{device.velocity}}
-          </button>
         </div>
-        <div class="col-md-2">
-          <div class="btn-group">
-            <button id="channel" type="button" class="btn btn-primary"
-                    dropdown-toggle>
-              Channel {{device.channel}} <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="channel">
-              <li role="menuitem"><a href="#">0</a></li>
-              <li role="menuitem"><a href="#">1</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-2">
-          {{device.key}}
-        </div>
-        <div class="col-md-2">
-          {{device.duration}} ms
-        </div>
-        <div class="col-md-2">
-          barnowl | barnacles
-        </div>
-      </div>-->
+        <div class="col-md-2"></div>
+      </div>
 
       <footer class="footer">
         <a href="https://github.com/reelyactive/midiot"> midiot </a>
