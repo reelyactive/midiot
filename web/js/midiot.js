@@ -10,7 +10,20 @@ angular.module('midiot', [ 'ui.bootstrap', 'btford.socket-io' ])
 
   // Midi controller
   .controller('MidiCtrl', function($scope, $http, $interval, Socket) {
+    $scope.devices = {};
+    $scope.controls = { mute: false };
+
     Socket.on('event', function(event) {
-      $scope.event = JSON.stringify(event);
+      var id = event.id;
+
+      $scope.devices[id] = event;
     });
+
+    $scope.update = function(device) {
+      Socket.emit('update', device);
+    };
+
+    $scope.control = function() {
+      Socket.emit('control', $scope.controls);
+    };
   });
