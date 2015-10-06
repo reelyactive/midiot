@@ -10,7 +10,7 @@
     "MIDI",
     "Audio"
   ],
-  "version": "0.0.2",
+  "version": "0.1.0",
   "engines": {
     "node": "^0.10.0"
   },
@@ -23,6 +23,8 @@
     "url": "https://github.com/reelyactive/midiot.git"
   },
   "dependencies": {
+    "barnowl": ">=0.4.12",
+    "barnacles": ">=0.3.0",
     "midi": ">=0.9.3",
     "express": ">=4.0.0",
     "path": ">=0.11.0",
