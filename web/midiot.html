@@ -35,8 +35,8 @@
       </nav>
 
       <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
+        <div class="col-xs-0 col-sm-1 col-md-2"></div>
+        <div class="col-xs-12 col-sm-10 col-md-8">
 
 
       <div class="well">
@@ -62,66 +62,86 @@
           </div>
         </form>
       </div>
-      <div class="" ng-repeat="(id, device) in devices">
-        <form class="form-inline">
-          <div class="form-group">
-            <tt>{{device.id}}</tt>
-          </div>
-          <div class="form-group">
-            <button class="btn ngclass: {{(device.type === 'noteOn')?
-                                          'btn-info' : 'btn-default'}}">
-              {{device.velocity}}
-            </button>
-          </div>
-          <div class="form-group">
-            <label for="key">Key:</label>
-            <input id="key" type="text" ng-model="device.key"
-                   ng-change="update(device)" class="form-control" size="3"
-                   maxlength="3"/>
-          </div>
-          <div class="form-group">
-            <label for="duration">Duration (ms):</label>
-            <input id="duration" type="text" ng-model="device.duration"
-                   ng-change="update(device)" class="form-control" size="4"
-                   maxlength="4"/>
-          </div>
-          <div class="form-group">
-            <label for="channel">Channel:</label>
-            <input id="channel" type="text" ng-model="device.channel"
-                   ng-change="update(device)" class="form-control" size="2"
-                   maxlength="2"/>
-          </div>
-          <div class="form-group">
-            <button ng-click="device.useBarnowl = !device.useBarnowl;
-                              update(device)"
-                    class="btn ngclass: {{device.useBarnowl?
-                                          'btn-primary' : 'btn-default'}}">
-              Real-Time
-            </button>
-            <button ng-click="device.useBarnacles = !device.useBarnacles;
-                              update(device)"
-                    class="btn ngclass: {{device.useBarnacles?
-                                          'btn-primary' : 'btn-default'}}">
-              Periodic
-            </button>
-          </div>
-          <div class="btn-group" dropdown>
-            <button id="category" type="button" class="btn btn-default"
-                    dropdown-toggle>
-              {{device.category}} <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu"
-                aria-labelledby="single-button">
-              <li role="menuitem"><a ng-click="device.category = 'Instrument'; update(device)">Instrument</a></li>
-              <li role="menuitem"><a ng-click="device.category = 'Controller'; update(device)">Controller</a></li>
-              <li role="menuitem"><a ng-click="device.category = 'Tap Tempo'; update(device)">Tap Tempo</a></li>
-            </ul>
-          </div>
-        </form>
+      <div>
+        <table class="table">
+          <tr class="active">
+            <th> Device ID </th>
+            <th> Velocity </th>
+            <th> Key </th>
+            <th> Duration (ms) </th>
+            <th> Channel </th>
+            <th> Real-time </th>
+            <th> Periodic </th>
+            <th> Category </th>
+          </tr>
+          <tr ng-repeat="(id, device) in devices">
+            <td> <tt>{{device.id}}</tt> </td>
+            <td> 
+              <button class="btn ngclass: {{(device.type === 'noteOn')?
+                                            'btn-info' : 'btn-default'}}">
+                {{device.velocity}}
+              </button>
+            </td>
+            <td>
+              <input id="key" type="text" ng-model="device.key"
+                     ng-change="update(device)" class="form-control" size="3"
+                     maxlength="3"/>
+            </td>
+            <td>
+              <input id="duration" type="text" ng-model="device.duration"
+                     ng-change="update(device)" class="form-control" size="4"
+                     maxlength="4"/>
+            </td>
+            <td>
+              <div class="btn-group" dropdown>
+                <button type="button" class="btn btn-default" dropdown-toggle>
+                  {{device.channel}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu"
+                    aria-labelledby="single-button">
+                  <li ng-repeat="channel in channels">
+                    <a href ng-click="device.channel = channel; update(device)">
+                      {{channel}}
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <button ng-click="device.useBarnowl = !device.useBarnowl;
+                                update(device)"
+                      class="btn ngclass: {{device.useBarnowl?
+                                            'btn-primary' : 'btn-default'}}">
+                {{device.useBarnowl? 'On' : 'Off'}}
+              </button>
+            </td>
+            <td>
+              <button ng-click="device.useBarnacles = !device.useBarnacles;
+                                update(device)"
+                      class="btn ngclass: {{device.useBarnacles?
+                                            'btn-primary' : 'btn-default'}}">
+                {{device.useBarnacles? 'On' : 'Off'}}
+              </button>
+            </td>
+            <td>
+              <div class="btn-group" dropdown>
+                <button id="category" type="button" class="btn btn-default"
+                        dropdown-toggle>
+                  {{device.category}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu"
+                    aria-labelledby="single-button">
+                  <li role="menuitem"><a ng-click="device.category = 'Instrument'; update(device)">Instrument</a></li>
+                  <li role="menuitem"><a ng-click="device.category = 'Controller'; update(device)">Controller</a></li>
+                  <li role="menuitem"><a ng-click="device.category = 'Tap Tempo'; update(device)">Tap Tempo</a></li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </table>
       </div>
 
-        </div>
-        <div class="col-md-2"></div>
+        <div class="col-xs-0 col-sm-1 col-md-2"></div>
       </div>
 
       <footer class="footer">
