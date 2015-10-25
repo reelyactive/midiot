@@ -11,7 +11,9 @@ angular.module('midiot', [ 'ui.bootstrap', 'btford.socket-io' ])
   // Midi controller
   .controller('MidiCtrl', function($scope, $http, $interval, Socket) {
     $scope.devices = {};
-    $scope.controls = { mute: false };
+    $scope.midiMaps = [ 'alesisSR18', 'allNotes', 'cMaj' ]; // TODO: load from
+                                                            //       API
+    $scope.controls = { mute: false, midiMap: $scope.midiMaps[0] };
 
     Socket.on('event', function(event) {
       var id = event.id;

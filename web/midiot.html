@@ -46,6 +46,20 @@
                                         'btn-warning' : 'btn-default'}}">
             Mute
           </button>
+          <div class="btn-group" dropdown>
+            <button id="midimap" type="button" class="btn btn-default"
+                    dropdown-toggle>
+              {{controls.midiMap}} <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu"
+                aria-labelledby="single-button">
+              <li ng-repeat="midiMap in midiMaps">
+                <a href ng-click="controls.midiMap = midiMap; control()">
+                  {{midiMap}}
+                </a>
+              </li>
+            </ul>
+          </div>
         </form>
       </div>
       <div class="" ng-repeat="(id, device) in devices">
