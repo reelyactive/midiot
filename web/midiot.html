@@ -39,35 +39,38 @@
         <div class="col-xs-12 col-sm-10 col-md-8">
 
 
-      <div class="well">
+      <div class="well well-sm">
         <form class="form-inline">
+          <div class="form-group">
+            <label for="midimap">MIDI Map:</label>
+            <div class="btn-group" id="midimap" dropdown>
+              <button class="btn btn-default" type="button" dropdown-toggle>
+                {{controls.midiMap}} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu"
+                  aria-labelledby="single-button">
+                <li ng-repeat="midiMap in midiMaps">
+                  <a href ng-click="controls.midiMap = midiMap; control()">
+                    {{midiMap}}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
           <button ng-click="controls.mute = !controls.mute; control()"
                   class="btn ngclass: {{controls.mute?
                                         'btn-warning' : 'btn-default'}}">
             Mute
           </button>
-          <div class="btn-group" dropdown>
-            <button id="midimap" type="button" class="btn btn-default"
-                    dropdown-toggle>
-              {{controls.midiMap}} <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu"
-                aria-labelledby="single-button">
-              <li ng-repeat="midiMap in midiMaps">
-                <a href ng-click="controls.midiMap = midiMap; control()">
-                  {{midiMap}}
-                </a>
-              </li>
-            </ul>
-          </div>
         </form>
       </div>
       <div>
-        <table class="table">
+        <table class="table table-condensed table-hover">
           <tr class="active">
             <th> Device ID </th>
             <th> Velocity </th>
             <th> Key </th>
+            <th> Note </th>
             <th> Duration (ms) </th>
             <th> Channel </th>
             <th> Real-time </th>
@@ -86,6 +89,10 @@
               <input id="key" type="text" ng-model="device.key"
                      ng-change="update(device)" class="form-control" size="3"
                      maxlength="3"/>
+            </td>
+            <td>
+              <input id="note" type="text" ng-model="noteMap[device.key]"
+                     class="form-control" size="4" disabled/>
             </td>
             <td>
               <input id="duration" type="text" ng-model="device.duration"
