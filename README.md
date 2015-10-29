@@ -19,7 +19,7 @@ Converts real-time wireless traffic (Bluetooth Smart, Active RFID) into MIDI not
 What's in a name?
 -----------------
 
-Musical Instrument Digital Interface of Things.  MIDI meets IoT: real-time, real-world sounds.  Watch [this short video](https://www.youtube.com/watch?v=CUhbfyi2ab4) to see, and hear, midiot in action.
+Musical Instrument Digital Interface of Things.  MIDI meets IoT: real-time, real-world sounds.  Watch [this short video](https://www.youtube.com/watch?v=CUhbfyi2ab4) to see, and hear, midiot in action.  There are also plenty of midiot-generated tracks on the [reelyActive SoundCloud](https://soundcloud.com/reelyactive).
 
 
 Installation
@@ -75,8 +75,7 @@ var middleware = new barnowl( { n: 1,
 var notifications = new barnacles( { delayMilliseconds: 960,
                                      minDelayMilliseconds: 960,
                                      keepAliveMilliseconds: 4800 } );
-var soundscape = new midiot( { minKey: 36,
-                               maxKey: 53,
+var soundscape = new midiot( { midiMap: "alesisSR18",
                                baseChannel: 0,
                                defaultDuration: 120 } );
 
@@ -90,7 +89,7 @@ soundscape.openPort(0);             //   update the number if necessary
 ```
 
 Again, point your browser to [localhost:3006/midiot.html](http://localhost:3006/midiot.html) to visualise and play with the settings in real time.  Then experiment with the various settings, for instance:
-- adjust minKey and maxKey to set the range of key values to which the transmitter identifiers are mapped
+- adjust midiMap to set the range of key values to which the transmitter identifiers are mapped: ("cMaj", "alesisSR18", "allNotes")
 - adjust the defaultDuration (in milliseconds) to set the default length of the notes
 - adjust mixingDelayMilliseconds to set the minimum period between two successive real-time notes from the same transmitter
 - adjust minMixingDelayMilliseconds to set the interval at which real-time notes will be emitted (this helps enormously to create consistent rhythms)
