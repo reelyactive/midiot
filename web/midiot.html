@@ -57,6 +57,23 @@
               </ul>
             </div>
           </div>
+          <div class="form-group">
+            <label for="channelmap">Channel Map:</label>
+            <div class="btn-group" id="channelmap" dropdown>
+              <button class="btn btn-default" type="button" dropdown-toggle>
+                {{controls.channelMap}} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu"
+                  aria-labelledby="single-button">
+                <li ng-repeat="channelMap in channelMaps">
+                  <a href ng-click="controls.channelMap = channelMap;
+                                    control()">
+                    {{channelMap}}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
           <button ng-click="controls.mute = !controls.mute; control()"
                   class="btn ngclass: {{controls.mute?
                                         'btn-warning' : 'btn-default'}}">
