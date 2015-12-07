@@ -89,7 +89,7 @@ soundscape.openPort(0);             //   update the number if necessary
 ```
 
 Again, point your browser to [localhost:3006/midiot.html](http://localhost:3006/midiot.html) to visualise and play with the settings in real time.  Then experiment with the various settings, for instance:
-- adjust midiMap to set the range of key values to which the transmitter identifiers are mapped: ("cMaj", "alesisSR18", "allNotes")
+- adjust midiMap to set the range of key values to which the transmitter identifiers are mapped: ("cMaj", "cMin", ..., "alesisSR18", "allNotes")
 - adjust channelMap to set the range of channel values to which the transmitter identifiers are mapped: ("allOnZero", "allChannels", "allButFifteen")
 - adjust the defaultDuration (in milliseconds) to set the default length of the notes
 - adjust mixingDelayMilliseconds to set the minimum period between two successive real-time notes from the same transmitter
