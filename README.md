@@ -5,7 +5,7 @@ midiot
 MIDI events from low-power wireless traffic
 -------------------------------------------
 
-Converts real-time wireless traffic (Bluetooth Smart, Active RFID) into MIDI notes.  The key of the note is determined by the transmitter's identifier and the velocity of the note is determined by the RSSI (proximity).  Additional parameters can be adjusted live through a web browser, for instance:
+Converts real-time wireless traffic (Bluetooth Smart, Active RFID) into MIDI notes _and_ OSC messages.  The key of the note is determined by the transmitter's identifier and the velocity of the note is determined by the RSSI (proximity).  Additional parameters can be adjusted live through a web browser, for instance:
 - key
 - duration
 - channel
@@ -96,6 +96,19 @@ Again, point your browser to [localhost:3006/midiot.html](http://localhost:3006/
 - adjust minMixingDelayMilliseconds to set the interval at which real-time notes will be emitted (this helps enormously to create consistent rhythms)
 - adjust delayMilliseconds and minDelayMilliseconds similar to the above but for periodic notes
 - adjust keepAliveMilliseconds to set the minimum period between two successive periodic notes from the same transmitter
+
+
+Options
+-------
+
+The following options are supported when instantiating midiot (those shown are the defaults):
+
+    {
+      oscLocalAddress: "127.0.0.1",
+      oscLocalPort: 57121,
+      oscTargetAddress: "127.0.0.1",
+      oscTargetPort: 57121
+    }
 
 
 Acknowledgements
