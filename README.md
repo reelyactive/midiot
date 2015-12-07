@@ -76,7 +76,7 @@ var notifications = new barnacles( { delayMilliseconds: 960,
                                      minDelayMilliseconds: 960,
                                      keepAliveMilliseconds: 4800 } );
 var soundscape = new midiot( { midiMap: "alesisSR18",
-                               baseChannel: 0,
+                               channelMap: "allOnZero",
                                defaultDuration: 120 } );
 
 middleware.bind( { protocol: 'serial', path: '/dev/ttyUSB0' } );
@@ -90,6 +90,7 @@ soundscape.openPort(0);             //   update the number if necessary
 
 Again, point your browser to [localhost:3006/midiot.html](http://localhost:3006/midiot.html) to visualise and play with the settings in real time.  Then experiment with the various settings, for instance:
 - adjust midiMap to set the range of key values to which the transmitter identifiers are mapped: ("cMaj", "alesisSR18", "allNotes")
+- adjust channelMap to set the range of channel values to which the transmitter identifiers are mapped: ("allOnZero", "allChannels", "allButFifteen")
 - adjust the defaultDuration (in milliseconds) to set the default length of the notes
 - adjust mixingDelayMilliseconds to set the minimum period between two successive real-time notes from the same transmitter
 - adjust minMixingDelayMilliseconds to set the interval at which real-time notes will be emitted (this helps enormously to create consistent rhythms)
