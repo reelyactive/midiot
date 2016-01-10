@@ -19,13 +19,15 @@ Converts real-time wireless traffic (Bluetooth Smart, Active RFID) into MIDI not
 What's in a name?
 -----------------
 
-Musical Instrument Digital Interface of Things.  MIDI meets IoT: real-time, real-world sounds.  Watch [this short video](https://www.youtube.com/watch?v=CUhbfyi2ab4) to see, and hear, midiot in action.  There are also plenty of midiot-generated tracks on the [reelyActive SoundCloud](https://soundcloud.com/reelyactive).
+Musical Instrument Digital Interface of Things.  MIDI meets IoT: real-time, real-world sounds.  Watch [this video playlist](https://youtu.be/CUhbfyi2ab4?list=PL11WqaPQMVvNMT66MVxi-XqIQld6zY3tx) to see, and hear, midiot in action.  There are also plenty of midiot-generated tracks on the [reelyActive SoundCloud](https://soundcloud.com/reelyactive).
 
 
 Installation
 ------------
 
     npm install midiot
+
+If the installation encounters errors while installing the [midi](https://www.npmjs.com/package/midi) package dependency, consult that package's [prerequisites](https://www.npmjs.com/package/midi#prerequisites).  For instance, on Linux it is often necessary to first install the libasound2-dev package via your package manager.
 
 
 Hello midiot
@@ -79,7 +81,7 @@ var soundscape = new midiot( { midiMap: "alesisSR18",
                                channelMap: "allOnZero",
                                defaultDuration: 120 } );
 
-middleware.bind( { protocol: 'serial', path: '/dev/ttyUSB0' } );
+middleware.bind( { protocol: 'serial', path: 'auto' } ); // See barnowl
 notifications.bind( { barnowl: middleware } );
 soundscape.bind( { barnowl: middleware } );
 soundscape.bind( { barnacles: notifications } );
