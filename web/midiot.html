@@ -2,11 +2,12 @@
 <html>
   <head>
     <title> reelyActive midiot </title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style/main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.1/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.1/ui-bootstrap-tpls.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.7/socket.io.min.js"></script>
     <script type="text/javascript" src="js/socket.js"></script>
     <script type="text/javascript" src="js/midiot.js"></script>
   </head>
@@ -33,148 +34,160 @@
           </ul>
         </div>
       </nav>
-
-      <div class="row">
-        <div class="col-xs-0 col-sm-1 col-md-2"></div>
-        <div class="col-xs-12 col-sm-10 col-md-8">
-
-
-      <div class="well well-sm">
-        <form class="form-inline">
-          <div class="form-group">
-            <label for="midimap">MIDI Map:</label>
-            <div class="btn-group" id="midimap" dropdown>
-              <button class="btn btn-default" type="button" dropdown-toggle>
-                {{controls.midiMap}} <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu"
-                  aria-labelledby="single-button">
-                <li ng-repeat="midiMap in midiMaps">
-                  <a href ng-click="controls.midiMap = midiMap; control()">
-                    {{midiMap}}
-                  </a>
-                </li>
-              </ul>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-0 col-sm-1 col-md-2"></div>
+          <div class="col-xs-12 col-sm-10 col-md-8">
+            <div class="well well-sm">
+              <form class="form-inline">
+                <div class="form-group">
+                  <label for="midimap">MIDI Map:</label>
+                  <div class="btn-group" id="midimap" dropdown>
+                    <button class="btn btn-default" type="button"
+                            dropdown-toggle>
+                      {{controls.midiMap}} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu"
+                        aria-labelledby="single-button">
+                      <li ng-repeat="midiMap in midiMaps">
+                        <a href ng-click="controls.midiMap = midiMap;
+                                          control()">
+                          {{midiMap}}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="channelmap">&nbsp; Channel Map:</label>
+                  <div class="btn-group" id="channelmap" dropdown>
+                    <button class="btn btn-default" type="button"
+                            dropdown-toggle>
+                      {{controls.channelMap}} <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu"
+                        aria-labelledby="single-button">
+                      <li ng-repeat="channelMap in channelMaps">
+                        <a href ng-click="controls.channelMap = channelMap;
+                                          control()">
+                          {{channelMap}}
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <button ng-click="controls.mute = !controls.mute; control()"
+                        class="btn ngclass: {{controls.mute?
+                                              'btn-warning' : 'btn-default'}}">
+                  Mute
+                </button>
+              </form>
+            </div>
+            <div>
+              <table class="table table-condensed table-hover">
+                <tr class="active">
+                  <th> Device ID </th>
+                  <th> Velocity </th>
+                  <th> Key </th>
+                  <th> Note </th>
+                  <th> Duration (ms) </th>
+                  <th> Channel </th>
+                  <th> Real-time </th>
+                  <th> Periodic </th>
+                  <th> Category </th>
+                </tr>
+                <tr ng-repeat="(id, device) in devices">
+                  <td> <tt>{{device.id}}</tt> </td>
+                  <td> 
+                    <button class="btn ngclass: {{(device.type === 'noteOn')?
+                                                 'btn-info' : 'btn-default'}}">
+                      {{device.velocity}}
+                    </button>
+                  </td>
+                  <td>
+                    <input id="key" type="text" ng-model="device.key"
+                           ng-change="update(device)" class="form-control"
+                           size="3" maxlength="3"/>
+                  </td>
+                  <td>
+                    <input id="note" type="text" ng-model="noteMap[device.key]"
+                           class="form-control" size="4" disabled/>
+                  </td>
+                  <td>
+                    <input id="duration" type="text" ng-model="device.duration"
+                           ng-change="update(device)" class="form-control"
+                           size="4" maxlength="4"/>
+                  </td>
+                  <td>
+                    <div class="btn-group" dropdown>
+                      <button type="button" class="btn btn-default"
+                              dropdown-toggle>
+                        {{device.channel}} <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu"
+                          aria-labelledby="single-button">
+                        <li ng-repeat="channel in channels">
+                          <a href ng-click="device.channel = channel;
+                                            update(device)">
+                            {{channel}}
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td>
+                    <button ng-click="device.useBarnowl = !device.useBarnowl;
+                                      update(device)"
+                            class="btn ngclass: {{device.useBarnowl?
+                                              'btn-primary' : 'btn-default'}}">
+                      {{device.useBarnowl? 'On' : 'Off'}}
+                    </button>
+                  </td>
+                  <td>
+                    <button ng-click="device.useBarnacles = 
+                                      !device.useBarnacles; update(device)"
+                            class="btn ngclass: {{device.useBarnacles?
+                                              'btn-primary' : 'btn-default'}}">
+                      {{device.useBarnacles? 'On' : 'Off'}}
+                    </button>
+                  </td>
+                  <td>
+                    <div class="btn-group" dropdown>
+                      <button id="category" type="button"
+                              class="btn btn-default" dropdown-toggle>
+                        {{device.category}} <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu"
+                          aria-labelledby="single-button">
+                        <li role="menuitem">
+                          <a ng-click="device.category = 'Instrument';
+                                       update(device)">Instrument</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.category = 'Controller';
+                                       update(device)">Controller</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.category = 'Tap Tempo';
+                                       update(device)">Tap Tempo</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
-          <div class="form-group">
-            <label for="channelmap">&nbsp; Channel Map:</label>
-            <div class="btn-group" id="channelmap" dropdown>
-              <button class="btn btn-default" type="button" dropdown-toggle>
-                {{controls.channelMap}} <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu" role="menu"
-                  aria-labelledby="single-button">
-                <li ng-repeat="channelMap in channelMaps">
-                  <a href ng-click="controls.channelMap = channelMap;
-                                    control()">
-                    {{channelMap}}
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <button ng-click="controls.mute = !controls.mute; control()"
-                  class="btn ngclass: {{controls.mute?
-                                        'btn-warning' : 'btn-default'}}">
-            Mute
-          </button>
-        </form>
+          <div class="col-xs-0 col-sm-1 col-md-2"></div>
+        </div>
       </div>
-      <div>
-        <table class="table table-condensed table-hover">
-          <tr class="active">
-            <th> Device ID </th>
-            <th> Velocity </th>
-            <th> Key </th>
-            <th> Note </th>
-            <th> Duration (ms) </th>
-            <th> Channel </th>
-            <th> Real-time </th>
-            <th> Periodic </th>
-            <th> Category </th>
-          </tr>
-          <tr ng-repeat="(id, device) in devices">
-            <td> <tt>{{device.id}}</tt> </td>
-            <td> 
-              <button class="btn ngclass: {{(device.type === 'noteOn')?
-                                            'btn-info' : 'btn-default'}}">
-                {{device.velocity}}
-              </button>
-            </td>
-            <td>
-              <input id="key" type="text" ng-model="device.key"
-                     ng-change="update(device)" class="form-control" size="3"
-                     maxlength="3"/>
-            </td>
-            <td>
-              <input id="note" type="text" ng-model="noteMap[device.key]"
-                     class="form-control" size="4" disabled/>
-            </td>
-            <td>
-              <input id="duration" type="text" ng-model="device.duration"
-                     ng-change="update(device)" class="form-control" size="4"
-                     maxlength="4"/>
-            </td>
-            <td>
-              <div class="btn-group" dropdown>
-                <button type="button" class="btn btn-default" dropdown-toggle>
-                  {{device.channel}} <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu"
-                    aria-labelledby="single-button">
-                  <li ng-repeat="channel in channels">
-                    <a href ng-click="device.channel = channel; update(device)">
-                      {{channel}}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </td>
-            <td>
-              <button ng-click="device.useBarnowl = !device.useBarnowl;
-                                update(device)"
-                      class="btn ngclass: {{device.useBarnowl?
-                                            'btn-primary' : 'btn-default'}}">
-                {{device.useBarnowl? 'On' : 'Off'}}
-              </button>
-            </td>
-            <td>
-              <button ng-click="device.useBarnacles = !device.useBarnacles;
-                                update(device)"
-                      class="btn ngclass: {{device.useBarnacles?
-                                            'btn-primary' : 'btn-default'}}">
-                {{device.useBarnacles? 'On' : 'Off'}}
-              </button>
-            </td>
-            <td>
-              <div class="btn-group" dropdown>
-                <button id="category" type="button" class="btn btn-default"
-                        dropdown-toggle>
-                  {{device.category}} <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu"
-                    aria-labelledby="single-button">
-                  <li role="menuitem"><a ng-click="device.category = 'Instrument'; update(device)">Instrument</a></li>
-                  <li role="menuitem"><a ng-click="device.category = 'Controller'; update(device)">Controller</a></li>
-                  <li role="menuitem"><a ng-click="device.category = 'Tap Tempo'; update(device)">Tap Tempo</a></li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-
-        <div class="col-xs-0 col-sm-1 col-md-2"></div>
-      </div>
-
       <footer class="footer">
         <a href="https://github.com/reelyactive/midiot"> midiot </a>
         &nbsp; | &nbsp;
         <a href="http://context.reelyactive.com"
            tooltip="We believe in an open Internet of Things"
            tooltip-placement="right">
-          &copy; reelyActive 2015
+          &copy; reelyActive 2015-2016
         </a>
       </footer>
     </div>
