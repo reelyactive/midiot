@@ -35,10 +35,17 @@ angular.module('midiot', [ 'ui.bootstrap', 'btford.socket-io' ])
                         channelMap: $scope.channelMaps[0] };
     $scope.noteMap = NOTE_MAP;
 
+    var audio = {};
+    loadAudioFiles();
+
     Socket.on('event', function(event) {
       var id = event.id;
 
       $scope.devices[id] = event;
+
+      if($scope.devices[id].type === 'noteOn') {
+        handleNoteOn($scope.devices[id]);
+      }
     });
 
     $scope.update = function(device) {
@@ -48,4 +55,80 @@ angular.module('midiot', [ 'ui.bootstrap', 'btford.socket-io' ])
     $scope.control = function() {
       Socket.emit('control', $scope.controls);
     };
+
+    function loadAudioFiles() {
+      audio.kick = new Audio('audio/kick.wav');
+      audio.snare = new Audio('audio/snare.wav');
+      audio.hatClosed = new Audio('audio/hatClosed.wav');
+      audio.hatShort = new Audio('audio/hatShort.wav');
+      audio.hatLong = new Audio('audio/hatLong.wav');
+      audio.rimshot = new Audio('audio/rimshot.wav');
+      audio.clap = new Audio('audio/clap.wav');
+      audio.tambourine = new Audio('audio/tambourine.wav');
+      audio.tomHigh = new Audio('audio/tomHigh.wav');
+      audio.tomMid = new Audio('audio/tomMid.wav');
+      audio.tomLow = new Audio('audio/tomLow.wav');
+      audio.barnowl = new Audio('audio/barnowl.wav');
+      audio.babybarnowl = new Audio('audio/babybarnowl.wav');
+    }
+
+    function handleNoteOn(device) {
+      var volume = device.velocity / 128;
+
+      switch(device.audio) {
+        case 'Kick':
+          audio.kick.volume = volume;
+          audio.kick.play();
+          break;
+        case 'Snare':
+          audio.snare.volume = volume;
+          audio.snare.play();
+          break;
+        case 'Hat Closed':
+          audio.hatClosed.volume = volume;
+          audio.hatClosed.play();
+          break;
+        case 'Hat Short':
+          audio.hatShort.volume = volume;
+          audio.hatShort.play();
+          break;
+        case 'Hat Long':
+          audio.hatLong.volume = volume;
+          audio.hatLong.play();
+          break;
+        case 'Rimshot':
+          audio.rimshot.volume = volume;
+          audio.rimshot.play();
+          break;
+        case 'Clap':
+          audio.clap.volume = volume;
+          audio.clap.play();
+          break;
+        case 'Tambourine':
+          audio.tambourine.volume = volume;
+          audio.tambourine.play();
+          break;
+        case 'Tom High':
+          audio.tomHigh.volume = volume;
+          audio.tomHigh.play();
+          break;
+        case 'Tom Mid':
+          audio.tomMid.volume = volume;
+          audio.tomMid.play();
+          break;
+        case 'Tom Low':
+          audio.tomLow.volume = volume;
+          audio.tomLow.play();
+          break;
+        case 'Barn Owl':
+          audio.barnowl.volume = volume;
+          audio.barnowl.play();
+          break;
+        case 'Baby Barn Owl':
+          audio.babybarnowl.volume = volume;
+          audio.babybarnowl.play();
+          break;
+        default:
+      }
+    }
   });

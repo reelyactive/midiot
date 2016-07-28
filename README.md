@@ -12,6 +12,7 @@ Converts real-time wireless traffic (Bluetooth Smart, Active RFID) into MIDI not
 - real-time triggering (via [barnowl](https://www.npmjs.com/package/barnowl))
 - periodic triggering (via [barnacles](https://www.npmjs.com/package/barnacles))
 - role (instrument, controller, tap tempo)
+- audio (samples played in-browser)
 
 ![midiot screenshot](http://reelyactive.com/images/midiot-screenshot.png)
 

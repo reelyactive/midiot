@@ -95,6 +95,7 @@
                   <th> Real-time </th>
                   <th> Periodic </th>
                   <th> Category </th>
+                  <th> Audio </th>
                 </tr>
                 <tr ng-repeat="(id, device) in devices">
                   <td> <tt>{{device.id}}</tt> </td>
@@ -170,6 +171,73 @@
                         <li role="menuitem">
                           <a ng-click="device.category = 'Tap Tempo';
                                        update(device)">Tap Tempo</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="btn-group" dropdown>
+                      <button id="audio" type="button"
+                              class="btn btn-default" dropdown-toggle>
+                        {{device.audio}} <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu"
+                          aria-labelledby="single-button">
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'None';
+                                       update(device)">None</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Kick';
+                                       update(device)">Kick</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Snare';
+                                       update(device)">Snare</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Hat Closed';
+                                       update(device)">Hat Closed</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Hat Short';
+                                       update(device)">Hat Short</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Hat Long';
+                                       update(device)">Hat Long</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Rimshot';
+                                       update(device)">Rimshot</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Clap';
+                                       update(device)">Clap</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Tambourine';
+                                       update(device)">Tambourine</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Tom High';
+                                       update(device)">Tom High</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Tom Mid';
+                                       update(device)">Tom Mid</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Tom Low';
+                                       update(device)">Tom Low</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Barn Owl';
+                                       update(device)">Barn Owl</a>
+                        </li>
+                        <li role="menuitem">
+                          <a ng-click="device.audio = 'Baby Barn Owl';
+                                       update(device)">Baby Barn Owl</a>
                         </li>
                       </ul>
                     </div>
