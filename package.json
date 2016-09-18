@@ -11,7 +11,7 @@
     "OSC",
     "Audio"
   ],
-  "version": "0.1.6",
+  "version": "0.2.0",
   "engines": {
     "node": ">=0.10.0"
   },
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "barnowl": ">=0.4.21",
-    "barnacles": ">=0.3.7",
+    "barnacles": ">=0.4.3",
     "midi": ">=0.9.5",
     "osc": ">=2.1.0",
     "express": ">=4.0.0",
