@@ -42,10 +42,16 @@ angular.module('midiot', [ 'ui.bootstrap', 'btford.socket-io' ])
     Socket.on('event', function(event) {
       var id = event.id;
 
-      $scope.devices[id] = event;
+      if(event.type === 'disappearance') {
+        delete $scope.devices[id];
+      }
 
-      if($scope.devices[id].type === 'noteOn') {
-        handleNoteOn($scope.devices[id]);
+      else {
+        $scope.devices[id] = event;
+
+        if($scope.devices[id].type === 'noteOn') {
+          handleNoteOn($scope.devices[id]);
+        }
       }
     });
 
