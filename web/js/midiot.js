@@ -24,13 +24,13 @@ angular.module('midiot', [ 'ui.bootstrap', 'btford.socket-io' ])
   // Midi controller
   .controller('MidiCtrl', function($scope, $http, $interval, Socket) {
     $scope.devices = {};
-    $scope.channels = [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ];
+    $scope.channels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
 
     // TODO: load all maps from an API
     $scope.midiMaps = [ 'cMaj', 'cMin', 'dMaj', 'dMin', 'eMaj', 'eMin',
                         'fMaj', 'fMin', 'gMaj', 'gMin', 'aMaj', 'aMin',
                         'bMaj', 'bMin', 'alesisSR18', 'allNotes' ];
-    $scope.channelMaps = [ 'allOnZero', 'allChannels', 'allButFifteen' ];
+    $scope.channelMaps = [ 'allOnOne', 'allChannels', 'allButSixteen' ];
 
     $scope.controls = { mute: false, midiMap: $scope.midiMaps[0],
                         channelMap: $scope.channelMaps[0] };

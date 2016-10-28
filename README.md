@@ -112,7 +112,7 @@ The following options are supported when instantiating midiot (those shown are t
       oscTargetAddress: "127.0.0.1",
       oscTargetPort: 57121,
       midiMap: "cMaj",
-      channelMap: "allOnZero",
+      channelMap: "allOnOne",
       defaultDuration: 60,
       defaultOn: { realTime: true, periodic: false }
     }
