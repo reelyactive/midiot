@@ -94,6 +94,7 @@
                   <th> Channel </th>
                   <th> Real-time </th>
                   <th> Periodic </th>
+                  <th> Solo </th>
                   <th> Category </th>
                   <th> Audio </th>
                 </tr>
@@ -150,6 +151,13 @@
                             class="btn ngclass: {{device.useBarnacles?
                                               'btn-primary' : 'btn-default'}}">
                       {{device.useBarnacles? 'On' : 'Off'}}
+                    </button>
+                  </td>
+                  <td>
+                    <button ng-click="soloToggle(device.id); control()"
+                            class="btn ngclass: {{(device.id == controls.solo)?
+                                              'btn-primary' : 'btn-default'}}">
+                      Solo
                     </button>
                   </td>
                   <td>

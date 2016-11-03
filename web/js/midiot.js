@@ -33,7 +33,8 @@ angular.module('midiot', [ 'ui.bootstrap', 'btford.socket-io' ])
     $scope.channelMaps = [ 'allOnOne', 'allChannels', 'allButSixteen' ];
 
     $scope.controls = { mute: false, midiMap: $scope.midiMaps[0],
-                        channelMap: $scope.channelMaps[0] };
+                        channelMap: $scope.channelMaps[0],
+                        solo: null };
     $scope.noteMap = NOTE_MAP;
 
     var audio = {};
@@ -62,6 +63,15 @@ angular.module('midiot', [ 'ui.bootstrap', 'btford.socket-io' ])
     $scope.control = function() {
       Socket.emit('control', $scope.controls);
     };
+
+    $scope.soloToggle = function(id) {
+      if($scope.controls.solo === id) {
+        $scope.controls.solo = null;
+      }
+      else {
+        $scope.controls.solo = id;
+      }
+    }
 
     function loadAudioFiles() {
       audio.kick = new Audio('audio/kick.wav');
