@@ -1,36 +1,39 @@
 {
   "name": "midiot",
   "homepage": "https://github.com/reelyactive/midiot/",
-  "author": "reelyActive <webdev@reelyactive.com>",
+  "author": {
+    "name": "reelyActive",
+    "email": "info@reelyactive.com"
+  },
   "description": "MIDI meets Internet of Things.  Real-time, real-world sounds.  We believe in an open Internet of Things.",
   "keywords": [
     "reelyActive",
-    "Smart Spaces",
+    "generative",
     "IoT",
     "MIDI",
     "OSC",
     "Audio"
   ],
-  "version": "0.2.7",
+  "version": "1.0.0",
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=20.0.0"
   },
-  "main": "./lib/server.js",
-  "bin": {
-    "midiot": "./bin/midiot"
+  "main": "./lib/midiot.js",
+  "bin": "./bin/midiot",
+  "main": "./lib/midiot.js",
+  "scripts": {
+    "start": "node bin/midiot"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/reelyactive/midiot.git"
   },
   "dependencies": {
-    "barnowl": "^0.4.28",
-    "barnacles": "^0.4.12",
-    "midi": ">=0.9.5",
-    "osc": ">=2.1.0",
-    "express": ">=4.0.0",
-    "path": ">=0.11.0",
-    "socket.io": ">=1.3.7"
+    "barnowl": "^1.3.3",
+    "express": "^4.21.0",
+    "osc": "^2.4.5",
+    "webmidi": "^3.1.11",
+    "ws": "^8.18.0"
   },
   "devDependencies": {},
   "bugs": {

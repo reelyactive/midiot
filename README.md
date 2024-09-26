@@ -1,122 +1,20 @@
 midiot
 ======
 
-
-MIDI events from low-power wireless traffic
--------------------------------------------
-
-Converts real-time wireless traffic (Bluetooth Smart, Active RFID) into MIDI notes _and_ OSC messages.  The key of the note is determined by the transmitter's identifier and the velocity of the note is determined by the RSSI (proximity).  Additional parameters can be adjusted live through a web browser, for instance:
-- key
-- duration
-- channel
-- real-time triggering (via [barnowl](https://www.npmjs.com/package/barnowl))
-- periodic triggering (via [barnacles](https://www.npmjs.com/package/barnacles))
-- role (instrument, controller, tap tempo)
-- audio (samples played in-browser)
-
-![midiot screenshot](http://reelyactive.com/images/midiot-screenshot.png)
+__midiot__ produces ambient sounds from the ambient wireless data of the Internet of Things (IoT).
 
 
 What's in a name?
 -----------------
 
-Musical Instrument Digital Interface of Things.  MIDI meets IoT: real-time, real-world sounds.  Watch [this video playlist](https://youtu.be/CUhbfyi2ab4?list=PL11WqaPQMVvNMT66MVxi-XqIQld6zY3tx) to see, and hear, midiot in action.  There are also plenty of midiot-generated tracks on the [reelyActive SoundCloud](https://soundcloud.com/reelyactive).
+Musical Instrument Digital Interface of Things.  MIDI meets IoT: real-time, real-world sounds.  Watch [this video playlist](https://youtu.be/CUhbfyi2ab4?list=PL11WqaPQMVvNMT66MVxi-XqIQld6zY3tx) to see, and hear, midiot (v0.x) in action.  There are also plenty of midiot-generated tracks on the [reelyActive SoundCloud](https://soundcloud.com/reelyactive).
 
 
-Installation
-------------
+Quick Start
+-----------
 
     npm install midiot
-
-If the installation encounters errors while installing the [midi](https://www.npmjs.com/package/midi) package dependency, consult that package's [prerequisites](https://www.npmjs.com/package/midi#prerequisites).  For instance, on Linux it is often necessary to first install the libasound2-dev package via your package manager.
-
-
-Hello midiot
-------------
-
-Run the following code to output two MIDI notes per second (without requiring any hardware):
-
-```javascript
-var midiot = require('midiot');
-var barnowl = require('barnowl');
-var barnacles = require('barnacles');
-
-var middleware = new barnowl();
-var notifications = new barnacles();
-var soundscape = new midiot();
-
-middleware.bind( { protocol: 'test', path: 'default' } );
-notifications.bind( { barnowl: middleware } );
-soundscape.bind( { barnowl: middleware } );
-soundscape.bind( { barnacles: notifications } );
-
-console.log(soundscape.getPorts()); // This will list available MIDI ports,
-soundscape.openPort(0);             //   update the number if necessary
-```
-
-Point your browser to [localhost:3006/midiot.html](http://localhost:3006/midiot.html) to visualise and play with the settings in real time.
-
-
-Now let's make some reel beats
-------------------------------
-
-Add a reelyActive [minimal starter kit](http://shop.reelyactive.com/products/starterkit-min) to capture real-time Bluetooth Smart traffic and generate some fat beats.  You'll need to install the serialport package:
-
-    npm install serialport
-
-Then start by running the following code which was used in [the demo video](https://www.youtube.com/watch?v=CUhbfyi2ab4).
-
-```javascript
-var midiot = require('midiot');
-var barnowl = require('barnowl');
-var barnacles = require('barnacles');
-
-var middleware = new barnowl( { n: 1,
-                                enableMixing: true,
-                                mixingDelayMilliseconds: 240,
-                                minMixingDelayMilliseconds: 120 } );
-var notifications = new barnacles( { delayMilliseconds: 960,
-                                     minDelayMilliseconds: 960,
-                                     keepAliveMilliseconds: 4800,
-                                     includeTiraidInEvent: true } );
-var soundscape = new midiot( { midiMap: "alesisSR18",
-                               channelMap: "allOnZero",
-                               defaultDuration: 120 } );
-
-middleware.bind( { protocol: 'serial', path: 'auto' } ); // See barnowl
-notifications.bind( { barnowl: middleware } );
-soundscape.bind( { barnowl: middleware } );
-soundscape.bind( { barnacles: notifications } );
-
-console.log(soundscape.getPorts()); // This will list available MIDI ports,
-soundscape.openPort(0);             //   update the number if necessary
-```
-
-Again, point your browser to [localhost:3006/midiot.html](http://localhost:3006/midiot.html) to visualise and play with the settings in real time.  Then experiment with the various settings, for instance:
-- adjust midiMap to set the range of key values to which the transmitter identifiers are mapped: ("cMaj", "cMin", ..., "alesisSR18", "allNotes")
-- adjust channelMap to set the range of channel values to which the transmitter identifiers are mapped: ("allOnZero", "allChannels", "allButFifteen")
-- adjust the defaultDuration (in milliseconds) to set the default length of the notes
-- adjust mixingDelayMilliseconds to set the minimum period between two successive real-time notes from the same transmitter
-- adjust minMixingDelayMilliseconds to set the interval at which real-time notes will be emitted (this helps enormously to create consistent rhythms)
-- adjust delayMilliseconds and minDelayMilliseconds similar to the above but for periodic notes
-- adjust keepAliveMilliseconds to set the minimum period between two successive periodic notes from the same transmitter
-
-
-Options
--------
-
-The following options are supported when instantiating midiot (those shown are the defaults):
-
-    {
-      oscLocalAddress: "127.0.0.1",
-      oscLocalPort: 57121,
-      oscTargetAddress: "127.0.0.1",
-      oscTargetPort: 57121,
-      midiMap: "cMaj",
-      channelMap: "allOnOne",
-      defaultDuration: 60,
-      defaultOn: { realTime: true, periodic: false }
-    }
+    npm start
 
 
 Acknowledgements
@@ -131,12 +29,24 @@ What's next?
 This is an active work in progress.  Expect regular changes and updates, as well as improved documentation!
 
 
+Contributing
+------------
+
+Discover [how to contribute](CONTRIBUTING.md) to this open source project which upholds a standard [code of conduct](CODE_OF_CONDUCT.md).
+
+
+Security
+--------
+
+Consult our [security policy](SECURITY.md) for best practices using this open source software and to report vulnerabilities.
+
+
 License
 -------
 
 MIT License
 
-Copyright (c) 2014-2019 reelyActive
+Copyright (c) 2014-2024 [reelyActive](https://www.reelyactive.com)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

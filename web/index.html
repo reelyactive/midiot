@@ -1,60 +1,150 @@
-<!DOCTYPE HTML>
-<html>
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
   <head>
-    <title> reelyActive midiot </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style/main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.4/ui-bootstrap-tpls.min.js"></script>
-    <script type="text/javascript" src="js/socket.js"></script>
-    <script type="text/javascript" src="js/midiot.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="MIDI meets IoT: real-time, real-world sounds.">
+    <link rel="stylesheet" href="../style/bootstrappyactive.min.css">
+    <script type="module" src="../js/color-modes.js"></script>
+    <title> MIDIoT by reelyActive </title>
   </head>
-  <body ng-app="midiot">
-    <div ng-controller="MidiCtrl">
-      <nav class="navbar navbar-default" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle"
-                  ng-init="navCollapsed = true"
-                  ng-click="navCollapsed = !navCollapsed">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="http://context.reelyactive.com">
-            <strong>reely</strong>Active
-          </a>
-        </div>
-        <div class="collapse navbar-collapse" ng-class="!navCollapsed && 'in'"
-             ng-click="navCollapsed = true">
-          <ul class="nav navbar-nav navbar-right">
-            <li class="active"><a href> MIDIoT </a></li>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary shadow">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="https://www.reelyactive.com/">
+          <img src="../images/reelyactive-logo-nav.png" width="165"
+               height="30" alt="reelyActive">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarItems" aria-controls="navbarItems"
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarItems">
+          <!-- Left-aligned navigation items -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          </ul>
+          <!-- Right-aligned navigation items -->
+          <ul class="navbar-nav">
+            <!-- Colour theme chooser -->
+            <li class="nav-item dropdown">
+              <button class="btn btn-link nav-link dropdown-toggle"
+                      id="bd-theme" type="button" aria-expanded="false"
+                      data-bs-toggle="dropdown" data-bs-display="static"
+                      aria-label="Toggle theme (auto)">
+                <i class="fas fa-adjust"></i>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end shadow"
+                  aria-labelledby="bd-theme-text">
+                <li>
+                  <button type="button" class="dropdown-item"
+                          data-bs-theme-value="light" aria-pressed="false">
+                    <i class="fas fa-sun"></i> Light
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item"
+                          data-bs-theme-value="dark" aria-pressed="false">
+                    <i class="fas fa-moon"></i> Dark
+                  </button>
+                </li>
+                <li>
+                  <button type="button" class="dropdown-item active"
+                          data-bs-theme-value="auto" aria-pressed="true">
+                    <i class="fas fa-adjust"></i> Auto
+                  </button>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarInfoDropdown"
+                 role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                 aria-expanded="false">
+                <i class="fas fa-question-circle"></i>
+              </a>
+              <!-- Info about tracking and open source software/licenses -->
+              <ul class="dropdown-menu dropdown-menu-end shadow"
+                   aria-labelledby="navbarInfoDropdown">
+                <li>
+                  <a class="dropdown-item"
+                     href="https://www.reelyactive.com/how-we-observe/#digital">
+                    <i class="fas fa-mouse-pointer"></i>
+                    Behaviour tracking free &nbsp;
+                    <span class="badge bg-success animate-breathing">
+                      <i class="fas fa-user-shield"></i>
+                    </span>
+                  </a>
+                </li>
+                <li class="dropdown-divider"></li>
+                <li>
+                  <a class="dropdown-item" target="_blank"
+                     href="https://getbootstrap.com" >
+                    <i class="fab fa-bootstrap"></i>
+                    Bootstrap 5 &nbsp;
+                    <span class="badge bg-light text-dark">
+                      <i class="fab fa-osi"></i> MIT
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" target="_blank"
+                     href="https://fontawesome.com" >
+                    <i class="fab fa-font-awesome"></i>
+                    Font Awesome (Free) &nbsp;
+                    <span class="badge bg-light text-dark">
+                      <i class="fab fa-creative-commons"></i>
+                      <i class="fab fa-osi"></i> MIT
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" target="_blank"
+                     href="https://github.com/reelyactive/web-style-guide/" >
+                    <i class="fas fa-code"></i>
+                    Web Style Guide &nbsp;
+                    <span class="badge bg-light text-dark">
+                      <i class="fab fa-osi"></i> MIT
+                   </span>
+                  </a>
+                </li>
+                <li class="dropdown-divider"></li>
+                <li>
+                  <a class="dropdown-item" target="_blank"
+                     href="https://www.reelyactive.com/made-in-montreal/" >
+                    <i class="fab fa-canadian-maple-leaf"></i>
+                    Made in Montr&eacute;al &nbsp;
+                    <i class="fas fa-city"></i>
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
-      </nav>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-0 col-lg-1"></div>
-          <div class="col-md-12 col-lg-10">
-            <h1 class="text-center"> MIDIoT </h1>
-            <p class="text-center">
-              <a href="midiot.html"
-                 class="btn btn-default"> Control Interface </a>
-            </p>
-          </div>
-          <div class="col-md-0 col-lg-1"></div>
+      </div>
+    </nav>
+    <!-- Content -->
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6 text-center">
+          <h1 class="mt-4">
+            MIDIoT
+            <small class="text-muted"> by reelyActive </small>
+          </h1>
+          <p class="lead"> MIDI meets IoT. </p>
         </div>
       </div>
-      <footer class="footer">
-        <a href="https://github.com/reelyactive/midiot"> midiot </a>
-        &nbsp; | &nbsp;
-        <a href="http://context.reelyactive.com"
-           tooltip="We believe in an open Internet of Things"
-           tooltip-placement="right">
-          &copy; reelyActive 2015-2016
-        </a>
-      </footer>
     </div>
+    <footer class="footer bg-dark bg-gradient">
+      <a href="https://github.com/reelyactive/midiot"> midiot </a>
+      &nbsp; | &nbsp;
+      <a href="https://www.reelyactive.com"> &copy; reelyActive 2015-2024 </a>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <script defer src="../js/fontawesome-reelyactive.min.js"></script>
+    <script src="../js/bootstrappyactive.bundle.min.js"></script>
   </body>
 </html>
